@@ -31,6 +31,7 @@ ifeq ($(V),1)
 SDCCFLAGS += -V
 endif
 
-SDCC       = sdcc -mmcs51 $(SDCCFLAGS)
-SDAS       = sdas8051 -plo
-FX2LOAD    = python3 -m fx2.fx2tool -d $(VID):$(PID) load
+SDCC           = sdcc -mmcs51 $(SDCCFLAGS)
+SDCC_NEEDS_MF := $(shell expr `sdcc -v | sed -rn 's/.*([2-9]\.[0-9]+\.[0-9]+).*/\1/p'` \>= 4.2.9)
+SDAS           = sdas8051 -plo
+FX2LOAD        = python3 -m fx2.fx2tool -d $(VID):$(PID) load
